@@ -1,0 +1,27 @@
+# Servicios => backend y frontend
+services:
+  # Backend
+  backend:
+    image: backend
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000"
+
+  # Frontend
+  frontend:
+    image: frontend
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    ports:
+      - "8000:80"
+    depends_on:
+      - backend
+
+
+# DESPLIEGUE DE APLICACION CON DOCKER COMPOSE
+# docker compose build => toma los 2 Dockerfile y los compilara para crear cada imagen
+# docker compose up => creamos un contenedor => red explicita donde tiene a los 2 contenedores
+# curl --location "curso-de-docker-fundamentos-clase-17-backend-1:5000/getMyInfo"
